@@ -1,5 +1,5 @@
 import { FlatList, Image, ImageBackground, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 import * as Animatable from 'react-native-animatable';
 import { icons } from '../constants';
 import { ResizeMode, Video } from "expo-av";
@@ -20,28 +20,31 @@ const zoomOut = {
     scale: 0.9,
   },
 };
-
 const TrendingItem = ({ activeItem, item }) => {
   const [play, setPlay] = useState(false);
-  return (
+  return (  
     <Animatable.View
       className="mr-5"
       animation={activeItem === item.$id ? zoomIn : zoomOut}
       duration={500}
-    >
-      
-       {play ? (
+    > 
+    {play ? (
         <Video
           source={{ uri: item.video }}
-          className="w-52 h-72 rounded-[33px] mt-3 bg-white/10"
+          className="w-60 h-72 rounded-[33px] mt-3 bg-white/10"
           resizeMode={ResizeMode.CONTAIN}
           useNativeControls
-          shouldPlay
+          shouldPlay 
+          //shouldPlay:   This prop controls the initial playback state. Here, it's set to true,
+          //  indicating the video should start playing when the component mounts
           onPlaybackStatusUpdate={(status) => {
             if (status.didJustFinish) {
               setPlay(false);
             }
           }}
+          //onPlaybackStatusUpdate: This prop is a callback function that receives updates about the video's playback status.
+          //  In this case, it checks for the didJustFinish event,
+          //  which indicates the video has finished playing, and sets the play state to false to stop playback
         />
       ) :
             <TouchableOpacity
@@ -86,7 +89,6 @@ const Trending = ({posts}) => {
       itemVisiblePercentThreshold:70
     }}
     contentOffset={{x:70}}
-
     />
   )
 }
