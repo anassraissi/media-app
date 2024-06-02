@@ -3,12 +3,11 @@ import { router, usePathname } from "expo-router";
 import { View, TouchableOpacity, Image, TextInput} from "react-native";
 import { icons } from "../constants";
 import { Alert } from "react-native";
-
 const SearchInput = ({ initialQuery }) => {
   const pathname = usePathname();
   const [query, setQuery] = useState(initialQuery || "");
-  console.log('query: '+query);
   return (
+    
     <View className="flex flex-row items-center space-x-4 w-full h-16 px-4 bg-black-100 rounded-2xl border-2 border-black-200 focus:border-secondary">
       <TextInput
         className="text-base mt-0.5 text-white flex-1 font-pregular"

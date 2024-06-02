@@ -31,6 +31,5 @@ const RoutLayout = () => {
     </Stack>
     </GlobalProvider>
   )
-  
 }
 export default RoutLayout
