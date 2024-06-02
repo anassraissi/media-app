@@ -1,9 +1,11 @@
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React, { useState } from 'react'
 import { icons } from '../constants'
-const VideoCard = ({video:{title,thumbnail,video,users:{username,avatar}}}) => {
+import { ResizeMode, Video } from "expo-av";
+const VideoCard = ({title,thumbnail,video,username,avatar}) => {
   const [play, setPlay] = useState(false)
   return (
+  
     <View className="flex flex-col items-center px-4 mb-14">
       <View className="flex flex-row gap-3 items-start">
         <View className="flex justify-center items-center flex-row flex-1"> 
@@ -34,7 +36,23 @@ const VideoCard = ({video:{title,thumbnail,video,users:{username,avatar}}}) => {
         </View>
       </View>
         {play ? (
-          <Text className="text-white">Playing</Text>
+                  <Video
+                  source={{ uri: video }}
+                  className=" w-full h-72 rounded-[33px] mt-3 bg-white/10"
+                  resizeMode={ResizeMode.CONTAIN}
+                  useNativeControls
+                  shouldPlay 
+                  //shouldPlay:   This prop controls the initial playback state. Here, it's set to true,
+                  //  indicating the video should start playing when the component mounts
+                  onPlaybackStatusUpdate={(status) => {
+                    if (status.didJustFinish) {
+                      setPlay(false);
+                    }
+                  }}
+                  //onPlaybackStatusUpdate: This prop is a callback function that receives updates about the video's playback status.
+                  //  In this case, it checks for the didJustFinish event,
+                  //  which indicates the video has finished playing, and sets the play state to false to stop playback
+                />
         ):
           <TouchableOpacity
           activeOpacity={0.7}
@@ -52,7 +70,6 @@ const VideoCard = ({video:{title,thumbnail,video,users:{username,avatar}}}) => {
             resizeMode="contain"
           />
         </TouchableOpacity>
-
         }
           </View>
   )

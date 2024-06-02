@@ -16,9 +16,8 @@ const RoutLayout = () => {
       "Poppins-Thin": require('../assets/fonts/Poppins-Thin.ttf'),
       "Poppins-Bold": require('../assets/fonts/Poppins-Bold.ttf')
     })
-  
     useEffect(()=>{
-        if(error) throw error;
+        if(error) throw error;  
         if(fontsLoaded) SplashScreen.hideAsync();
         if(!fontsLoaded && !error) return null  
     },[fontsLoaded,error])
@@ -27,8 +26,8 @@ const RoutLayout = () => {
     <Stack>
         <Stack.Screen name="index" options={{headerShown:false}}/>
         <Stack.Screen name="(auth)" options={{headerShown:false}}/>
-        <Stack.Screen name="(tabs)" options={{headerShown:false}}
-/>
+        <Stack.Screen name="(tabs)" options={{headerShown:false}}/>
+        <Stack.Screen name="search/[query]" options={{ headerShown: false }} />
     </Stack>
     </GlobalProvider>
   )

@@ -11,7 +11,6 @@ const zoomIn = {
     scale: 1.1,
   },
 };
-
 const zoomOut = {
   0: {
     scale: 1,
@@ -24,7 +23,7 @@ const TrendingItem = ({ activeItem, item }) => {
   const [play, setPlay] = useState(false);
   return (  
     <Animatable.View
-      className="mr-5"
+      className="mr-4"
       animation={activeItem === item.$id ? zoomIn : zoomOut}
       duration={500}
     > 
@@ -91,8 +90,7 @@ const Trending = ({posts}) => {
     contentOffset={{x:70}}
     />
   )
-}
-
+} 
 export default Trending
 
 const styles = StyleSheet.create({})
