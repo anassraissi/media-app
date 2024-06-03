@@ -8,11 +8,13 @@ import { getAllPosts, getLatestPosts } from '../../lib/appwrite'
 import useAppwrite from '../../lib/useAppwrite'
 import VideoCard from '../../components/VideoCard'
 import EmptyState from '../../components/EmptyState'
+import { useGlobalContext } from '../../context/GlobalProvider'
 
 const Home = () => {
   const {data:posts,refetch}=useAppwrite(getAllPosts); // rename data as posts
   const {data:latestPosts}=useAppwrite(getLatestPosts); // rename data as latestPosts
   const [refreshing, setRefreshing] = useState(false)
+  const { loading, isLogged,user } = useGlobalContext();
   const onRefresh=async()=>{
         setRefreshing(true);
         // recall to any new videos appears
@@ -42,7 +44,7 @@ const Home = () => {
                     Welcome Back
                   </Text>
                   <Text className="text-2xl font-psemibold text-white">
-                    JSMastery
+                    {user?.username}
                   </Text>
                 </View>
   
